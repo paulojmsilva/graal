@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * The Universal Permissive License (UPL), Version 1.0
@@ -71,12 +71,13 @@ final class DefaultLongExports {
     @ExportMessage
     static boolean fitsInFloat(Long receiver) {
         float f = receiver;
-        return f == receiver;
+        return (long) f == receiver;
     }
 
     @ExportMessage
     static boolean fitsInDouble(Long receiver) {
-        return NumberUtils.inSafeDoubleRange(receiver);
+        double d = receiver;
+        return (long) d == receiver;
     }
 
     @ExportMessage
@@ -113,7 +114,7 @@ final class DefaultLongExports {
     static float asFloat(Long receiver) throws UnsupportedMessageException {
         long l = receiver;
         float f = l;
-        if (f == l) {
+        if ((long) f == l) {
             return f;
         }
         throw UnsupportedMessageException.create();
@@ -122,7 +123,8 @@ final class DefaultLongExports {
     @ExportMessage
     static double asDouble(Long receiver) throws UnsupportedMessageException {
         long l = receiver;
-        if (NumberUtils.inSafeDoubleRange(l)) {
+        double d = l;
+        if ((long) d == l) {
             return l;
         }
         throw UnsupportedMessageException.create();

@@ -1,6 +1,6 @@
 # DaCapo-related targets
 
-bench-arguments : ["--machine-name", "${MACHINE_NAME}", "--", "-Xmx${XMX}", "-Xms${XMS}", "-XX:+PrintConcurrentLocks", "--jvm-config=${JVM_CONFIG}", "--jvm=${JVM}"]
+bench-arguments : ["--machine-name", "${MACHINE_NAME}", "--", "-Xmx${XMX}", "-Xms${XMS}", "-XX:+PrintConcurrentLocks", "-Dgraal.CompilationFailureAction=Diagnose", "--jvm-config=${JVM_CONFIG}", "--jvm=${JVM}"]
 
 bench-jvmci : {
   mx-benchmark : ["mx", "--kill-with-sigquit", "benchmark", "--fork-count-file=${FORK_COUNT_FILE}", "--extras=${BENCH_SERVER_EXTRAS}", "--results-file", "${BENCH_RESULTS_FILE_PATH}"]
@@ -137,7 +137,7 @@ bench-specjbb2015: ${bench-common} ${specjbb-large-heap} ${specjbb-bench-notific
     ${bench-jvmci.mx-specjbb2015} ${bench-arguments}
   ]
   downloads: {
-    SPECJBB2015: { name: specjbb2015, version: "1.02" }
+    SPECJBB2015: { name: specjbb2015, version: "1.03" }
   }
   timelimit: "3:00:00"
 }

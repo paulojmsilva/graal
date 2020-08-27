@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * The Universal Permissive License (UPL), Version 1.0
@@ -102,6 +102,8 @@ import com.oracle.truffle.api.utilities.TriState;
  * <li>{@link Byte}, {@link Short}, {@link Integer}, {@link Long}, {@link Float} and {@link Double}
  * are interpreted as {@link #isNumber(Object) number} values.
  * </ul>
+ * Note that {@code null} is <i>never</i> a valid interop value. Instead, use a
+ * {@link TruffleObject} which implements {@link #isNull(Object)} message.
  * <p>
  * The following type combinations are mutually exclusive and cannot return <code>true</code> for
  * the type check message of the same receiver value:
